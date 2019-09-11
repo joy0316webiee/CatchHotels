@@ -67,6 +67,11 @@ export default {
       width: 24px;
       height: 24px;
       border-radius: 50%;
+
+      @include screen-md {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
   .dropdown-menu {
@@ -86,6 +91,12 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+
+    @include screen-md {
+      padding: 10px 0px;
+      width: 130px;
+      height: 100px;
+    }
 
     &::before {
       content: "";
@@ -108,6 +119,11 @@ export default {
       color: #949494;
       cursor: pointer;
 
+      @include screen-md {
+        padding: 8px 24px;
+        font-size: 15px;
+      }
+
       &:hover {
         background-color: #ddd;
         color: #ffffff;
@@ -117,6 +133,11 @@ export default {
         width: 24px;
         height: 24px;
         border-radius: 50%;
+
+        @include screen-md {
+          width: 20px;
+          height: 20px;
+        }
       }
       span {
         margin-left: 6px;

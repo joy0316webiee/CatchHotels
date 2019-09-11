@@ -406,6 +406,10 @@ export default {
     background-size: cover;
     position: relative;
 
+    @include screen-md {
+      height: 400px;
+    }
+
     &:before {
       content: "";
       width: 100%;
@@ -426,6 +430,13 @@ export default {
       width: 1286px;
       height: 100%;
 
+      @include screen-lg {
+        width: 1100px;
+      }
+      @include screen-md {
+        width: 850px;
+      }
+
       .title {
         margin: 0px;
         color: #ffffff;
@@ -433,6 +444,10 @@ export default {
         font-size: 72px;
         font-weight: 600;
         top: 90px;
+
+        @include screen-md {
+          font-size: 60px;
+        }
       }
       .description {
         top: 107px;
@@ -444,17 +459,29 @@ export default {
           font-size: 20px;
           font-weight: 400;
           line-height: 36px;
+
+          @include screen-md {
+            font-size: 17px;
+          }
         }
       }
     }
 
     .reserv-hotel {
-      width: 1288px;
+      width: 1286px;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
       border-radius: 4px;
       background-color: #ffffff;
       margin: 0 auto;
       bottom: 96px;
+
+      @include screen-lg {
+        width: 1100px;
+      }
+      @include screen-md {
+        width: 850px;
+        bottom: 75px;
+      }
 
       .reserv-header {
         height: 72px;
@@ -464,21 +491,37 @@ export default {
         align-items: center;
         padding: 20px 0 20px 30px;
 
+        @include screen-md {
+          height: 60px;
+        }
+
         > div {
           display: flex;
           align-items: center;
 
           &:nth-child(2) {
             margin-left: 54px;
+
+            @include screen-md {
+              margin-left: 30px;
+            }
           }
 
           span {
             margin-left: 18px;
+
+            @include screen-md {
+              font-size: 15px;
+            }
           }
         }
       }
       .reserv-content {
         height: 142px;
+
+        @include screen-md {
+          height: 100px;
+        }
 
         .have-already {
           height: 100%;
@@ -491,6 +534,10 @@ export default {
             font-size: 18px;
             font-weight: 400;
             line-height: 30px;
+
+            @include screen-md {
+              font-size: 15px;
+            }
 
             strong {
               color: #ff3d11;
@@ -511,11 +558,22 @@ export default {
             align-items: center;
             justify-content: space-between;
 
+            @include screen-lg {
+              padding: 28px 10px 21px 30px;
+            }
+            @include screen-md {
+              padding: 12px 50px 12px 30px;
+            }
+
             span {
               color: #949494;
               font-family: Poppins;
               font-size: 16px;
               font-weight: 400;
+
+              @include screen-md {
+                font-size: 14px;
+              }
             }
 
             .email {
@@ -534,6 +592,13 @@ export default {
                 font-size: 18px;
                 font-weight: 400;
 
+                @include screen-md {
+                  margin-top: 6px;
+                  width: 150px;
+                  height: 40px;
+                  font-size: 14px;
+                }
+
                 &::placeholder {
                   color: #8f8f8f;
                 }
@@ -547,6 +612,10 @@ export default {
                 width: 580px;
                 margin-top: 9px;
 
+                @include screen-md {
+                  width: 400px;
+                }
+
                 .service {
                   width: 170px;
                   height: 54px;
@@ -556,12 +625,27 @@ export default {
                   opacity: 0.5;
                   cursor: pointer;
 
+                  @include screen-md {
+                    width: 126px;
+                    height: 40px;
+                  }
+
                   &.active {
                     box-shadow: 0 3px 13px rgba(0, 0, 0, 0.08);
                     border-radius: 4px;
                     border: 2px solid #09d4a1;
                     background-color: #f7f7f7;
                     opacity: 1;
+                  }
+
+                  img {
+                    @include screen-md {
+                      max-width: 90px;
+
+                      &:nth-child(2) {
+                        max-width: 55px;
+                      }
+                    }
                   }
                 }
               }
@@ -582,6 +666,11 @@ export default {
               color: #ffffff;
               cursor: pointer;
 
+              @include screen-md {
+                width: 180px;
+                font-size: 16px;
+              }
+
               &:hover {
                 background-color: #e02900;
               }
@@ -597,6 +686,11 @@ export default {
     height: 579px;
     background-color: #ffffff;
 
+    @include screen-md {
+      padding-top: 150px;
+      height: 420px;
+    }
+
     h2 {
       text-align: center;
       color: #091613;
@@ -604,6 +698,10 @@ export default {
       font-size: 48px;
       font-weight: 600;
       margin: 0;
+
+      @include screen-md {
+        font-size: 38px;
+      }
     }
 
     > div {
@@ -616,9 +714,21 @@ export default {
 
       &.have-already {
         width: 740px;
+
+        @include screen-lg {
+          width: 650px;
+        }
       }
       &.do-not-have {
         width: 1344px;
+
+        @include screen-lg {
+          width: 1280px;
+        }
+        @include screen-md {
+          margin-top: 25px;
+          width: 900px;
+        }
       }
 
       .flow {
@@ -639,6 +749,11 @@ export default {
                 width: 50px;
                 height: 60px;
                 object-fit: contain;
+
+                @include screen-md {
+                  width: 40px;
+                  height: 40px;
+                }
               }
             }
             &.image-email {
@@ -649,11 +764,21 @@ export default {
               background-color: #f3f3f3;
               padding: 13px 0 13px 15px;
 
+              @include screen-md {
+                padding: 7px 0 7px 12px;
+                width: 140px;
+                height: 35px;
+              }
+
               span {
                 color: #8f8f8f;
                 font-family: Rubik;
                 font-size: 14px;
                 font-weight: 400;
+
+                @include screen-md {
+                  font-size: 13px;
+                }
               }
             }
             &.image-reserve {
@@ -666,11 +791,20 @@ export default {
               justify-content: center;
               margin: 0 auto;
 
+              @include screen-md {
+                width: 144px;
+                height: 35px;
+              }
+
               span {
                 color: #ffffff;
                 font-family: "Source Sans Pro";
                 font-size: 18px;
                 font-weight: 700;
+
+                @include screen-md {
+                  font-size: 15px;
+                }
               }
               img {
                 width: 32px;
@@ -679,6 +813,12 @@ export default {
                 position: absolute;
                 right: 0;
                 bottom: -22px;
+
+                @include screen-md {
+                  width: 23px;
+                  height: 40px;
+                  right: 0px;
+                }
               }
             }
             &.image-book {
@@ -691,16 +831,33 @@ export default {
               align-items: center;
               justify-content: center;
 
+              @include screen-md {
+                width: 140px;
+                height: 35px;
+              }
+
               span {
                 color: #ffffff;
                 font-family: "Source Sans Pro";
                 font-size: 18px;
                 font-weight: 700;
+
+                @include screen-md {
+                  font-size: 15px;
+                }
               }
               img {
                 position: absolute;
                 right: 0;
                 bottom: -25px;
+
+                @include screen-md {
+                  width: 23px;
+                  height: 31px;
+                  object-fit: contain;
+                  top: 20px;
+                  right: 0px;
+                }
               }
             }
             &.image-monitor {
@@ -710,11 +867,19 @@ export default {
               position: relative;
               height: 41px;
 
+              @include screen-md {
+                width: 155px;
+              }
+
               span {
                 color: #09d4a1;
                 font-family: Rubik;
                 font-size: 20px;
                 font-weight: 500;
+
+                @include screen-md {
+                  font-size: 18px;
+                }
               }
               img {
                 width: 49px;
@@ -723,6 +888,13 @@ export default {
                 position: absolute;
                 right: 41px;
                 top: 1px;
+
+                @include screen-md {
+                  width: 35px;
+                  height: 35px;
+                  right: 31px;
+                  top: 6px;
+                }
               }
             }
             &.image-notify {
@@ -732,10 +904,19 @@ export default {
               justify-content: center;
               position: relative;
 
+              @include screen-md {
+                width: 150px;
+              }
+
               img {
                 width: 55px;
                 height: 49px;
                 object-fit: contain;
+
+                @include screen-md {
+                  width: 35px;
+                  height: 30px;
+                }
               }
               span {
                 width: 27px;
@@ -752,12 +933,24 @@ export default {
                 position: absolute;
                 right: 56px;
                 top: -11px;
+
+                @include screen-md {
+                  width: 20px;
+                  height: 20px;
+                  font-size: 13px;
+                  right: 50px;
+                  top: 0px;
+                }
               }
             }
           }
         }
         .description {
           margin-top: 57px;
+
+          @include screen-md {
+            margin-top: 35px;
+          }
 
           p {
             margin: 0;
@@ -766,6 +959,10 @@ export default {
             font-family: Poppins;
             font-size: 16px;
             font-weight: 700;
+
+            @include screen-md {
+              font-size: 12px;
+            }
           }
         }
       }
@@ -776,11 +973,20 @@ export default {
         align-items: center;
         justify-content: space-between;
 
+        @include screen-md {
+          width: 25px;
+        }
+
         span {
           width: 5px;
           height: 5px;
           background-color: #cacaca;
           border-radius: 50%;
+
+          @include screen-md {
+            width: 3px;
+            height: 3px;
+          }
         }
       }
     }
@@ -792,11 +998,20 @@ export default {
     text-align: center;
     padding: 100px 20px 100px;
 
+    @include screen-md {
+      height: 650px;
+      padding: 70px 20px 70px;
+    }
+
     label {
       color: #09d4a1;
       font-family: Poppins;
       font-size: 24px;
       font-weight: 500;
+
+      @include screen-md {
+        font-size: 19px;
+      }
     }
     h2 {
       color: #000000;
@@ -804,6 +1019,10 @@ export default {
       font-size: 48px;
       font-weight: 600;
       margin: 0;
+
+      @include screen-md {
+        font-size: 38px;
+      }
     }
     p {
       display: flex;
@@ -814,6 +1033,10 @@ export default {
       font-size: 16px;
       font-weight: 400;
       line-height: 30px;
+
+      @include screen-md {
+        font-size: 15px;
+      }
 
       strong {
         color: #091613;
@@ -833,11 +1056,20 @@ export default {
     text-align: center;
     padding: 100px 0 100px;
 
+    @include screen-md {
+      height: 430px;
+      padding: 70px 0 70px;
+    }
+
     label {
       color: #09d4a1;
       font-family: Poppins;
       font-size: 24px;
       font-weight: 500;
+
+      @include screen-md {
+        font-size: 19px;
+      }
     }
     h2 {
       color: #ffffff;
@@ -845,6 +1077,10 @@ export default {
       font-size: 48px;
       font-weight: 600;
       margin: 10px 0 10px;
+
+      @include screen-md {
+        font-size: 38px;
+      }
     }
     > p {
       width: 628px;
@@ -855,11 +1091,20 @@ export default {
       font-weight: 400;
       line-height: 29px;
       margin: 10px auto;
+
+      @include screen-md {
+        width: 530px;
+        font-size: 16px;
+      }
     }
 
     .subscribe {
       width: 487px;
       margin: 50px auto 0px;
+
+      @include screen-md {
+        width: 400px;
+      }
 
       p {
         color: #9e9e9e;
@@ -867,6 +1112,10 @@ export default {
         font-size: 14px;
         font-weight: 400;
         text-align: right;
+
+        @include screen-md {
+          font-size: 13px;
+        }
       }
     }
   }
@@ -876,11 +1125,19 @@ export default {
     text-align: center;
     padding: 100px 0 100px;
 
+    @include screen-md {
+      padding: 70px 0 70px;
+    }
+
     label {
       color: #09d4a1;
       font-family: Poppins;
       font-size: 24px;
       font-weight: 500;
+
+      @include screen-md {
+        font-size: 19px;
+      }
     }
     h2 {
       color: #000000;
@@ -888,6 +1145,10 @@ export default {
       font-size: 48px;
       font-weight: 600;
       margin: 10px 0 10px;
+
+      @include screen-md {
+        font-size: 38px;
+      }
     }
   }
 
@@ -896,23 +1157,41 @@ export default {
     padding: 100px 0 100px;
     height: 816px;
 
+    @include screen-md {
+      padding: 70px 0 70px;
+      height: 700px;
+    }
+
     h2 {
       color: #000000;
       font-family: Poppins;
       font-size: 48px;
       font-weight: 600;
       margin: 10px 0 10px;
+
+      @include screen-md {
+        font-size: 38px;
+      }
     }
     p {
       color: #949494;
       font-family: Rubik;
       font-size: 20px;
       font-weight: 400;
+
+      @include screen-md {
+        font-size: 17px;
+      }
     }
 
     .form {
       margin: 46px auto 0;
       width: 725px;
+
+      @include screen-md {
+        margin: 35px auto 0;
+        width: 550px;
+      }
 
       > * {
         width: 100%;
@@ -924,6 +1203,11 @@ export default {
         border: 1px solid #c7c7c7;
         background-color: #f7f7f7;
         border-radius: 4px;
+
+        @include screen-md {
+          padding: 15px 15px 15px 27px;
+        }
+
         ::placeholder {
           color: #949494;
         }
@@ -931,10 +1215,20 @@ export default {
 
       > input {
         height: 80px;
+
+        @include screen-md {
+          height: 60px;
+          font-size: 15px;
+        }
       }
       > textarea {
         height: 160px;
         resize: none;
+
+        @include screen-md {
+          height: 130px;
+          font-size: 15px;
+        }
       }
       > button {
         height: 76px;
@@ -946,6 +1240,11 @@ export default {
         font-size: 22px;
         font-weight: 500;
         cursor: pointer;
+
+        @include screen-md {
+          height: 65px;
+          font-size: 18px;
+        }
 
         &:hover {
           background-color: #e02900;

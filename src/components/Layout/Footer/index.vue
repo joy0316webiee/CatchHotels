@@ -39,9 +39,21 @@ export default {
   background-color: #25302d;
   padding: 66px 0px 50px;
 
+  @include screen-md {
+    height: 300px;
+    padding: 50px 0px 35px;
+  }
+
   .container {
     width: 1290px;
     margin: 0 auto;
+
+    @include screen-lg {
+      width: 1100px;
+    }
+    @include screen-md {
+      width: 850px;
+    }
 
     .newsletter {
       display: flex;
@@ -54,6 +66,10 @@ export default {
         font-size: 52px;
         font-weight: 400;
         margin: 0;
+
+        @include screen-md {
+          font-size: 40px;
+        }
       }
       .subscribe {
         display: flex;
@@ -66,6 +82,11 @@ export default {
           font-size: 18px;
           font-weight: 400;
           margin-right: 27px;
+
+          @include screen-md {
+            font-size: 15px;
+            width: 110px;
+          }
         }
       }
     }
@@ -74,6 +95,11 @@ export default {
       border: 1px solid #4f5c67;
       margin-top: 74px;
       margin-bottom: 50px;
+
+      @include screen-md {
+        margin-top: 60px;
+        margin-bottom: 38px;
+      }
     }
     .info {
       position: relative;

@@ -45,7 +45,13 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/constants/constants.scss";
+
 .phone-input__wrapper {
+  @include screen-md {
+    padding: 2px 15px 2px 18px !important;
+  }
+
   .telephone-wrapper {
     border: none !important;
     box-shadow: none !important;
@@ -63,6 +69,10 @@ export default {
           font-weight: 400;
           line-height: 45px;
           margin-left: 7px;
+
+          @include screen-md {
+            font-size: 16px;
+          }
         }
       }
       > ul {
@@ -80,6 +90,10 @@ export default {
       font-size: 18px;
       font-weight: 400;
       padding-left: 30px;
+
+      @include screen-md {
+        font-size: 15px;
+      }
 
       &::placeholder {
         color: #949494;

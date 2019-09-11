@@ -1,6 +1,12 @@
 <template>
   <div class="card-carousel-wrapper">
-    <vueper-slides class="no-shadow" :visible-slides="3" :slide-ratio="1/4" :dragging-distance="70">
+    <vueper-slides
+      class="no-shadow"
+      :visible-slides="3"
+      :slide-ratio="1/4"
+      :dragging-distance="70"
+      :breakpoints="breakpoints"
+    >
       <img src="@/assets/images/arr_left.png" alt="arrow_left" slot="arrowLeft" />
       <img src="@/assets/images/arr_right.png" alt="arrow_left" slot="arrowRight" />
 
@@ -53,15 +59,34 @@ export default {
   },
   props: {
     testimonials: Array
+  },
+  data() {
+    return {
+      breakpoints: {
+        1340: {
+          visibleSlides: 2,
+          slideRatio: 1 / 3
+        }
+      }
+    };
   }
 };
 </script>
 
 <style lang="scss">
+@import "@/constants/constants.scss";
+
 .card-carousel-wrapper {
   width: 1420px;
   margin: 0px auto;
   padding-top: 10px;
+
+  @include screen-lg {
+    width: 1200px;
+  }
+  @include screen-md {
+    width: 800px;
+  }
 
   .vueperslides__bullet {
     border: none;
@@ -70,6 +95,11 @@ export default {
     width: 12px;
     height: 12px;
     background-color: #e5e5e5;
+
+    @include screen-md {
+      width: 8px;
+      height: 8px;
+    }
   }
   .vueperslides__bullet--active {
     background-color: #09d4a1;
@@ -77,19 +107,36 @@ export default {
   .vueperslides__bullets--outside {
     margin-top: 96px;
     bottom: 0;
+
+    @include screen-md {
+      margin-top: 60px;
+    }
   }
   .vueperslides__arrow {
     &.vueperslides__arrow--prev {
       left: -120px;
+
+      @include screen-lg {
+        left: -60px;
+      }
     }
     &.vueperslides__arrow--next {
       right: -120px;
+
+      @include screen-lg {
+        right: -60px;
+      }
     }
 
     img {
       width: 32px;
       height: 35px;
       object-fit: contain;
+
+      @include screen-md {
+        width: 25px;
+        height: 25px;
+      }
     }
   }
 
@@ -98,6 +145,13 @@ export default {
       .vueperslide__content-wrapper {
         padding: 89px 54px;
 
+        @include screen-lg {
+          padding: 52px 27px;
+        }
+        @include screen-md {
+          padding: 60px 30px;
+        }
+
         h3 {
           margin: 0;
           font-family: Rubik;
@@ -105,6 +159,10 @@ export default {
           line-height: 29px;
           color: #09d4a1;
           font-size: 30px;
+
+          @include screen-md {
+            font-size: 22px;
+          }
         }
         p {
           margin: 10px 0 10px;
@@ -113,6 +171,10 @@ export default {
           font-size: 18px;
           font-weight: 500;
           line-height: 29px;
+
+          @include screen-md {
+            font-size: 16px;
+          }
         }
         button {
           margin-top: 60px;
@@ -126,6 +188,13 @@ export default {
           font-size: 18px;
           font-weight: 500;
           cursor: pointer;
+
+          @include screen-md {
+            width: 250px;
+            height: 45px;
+            font-size: 16px;
+            margin-top: 45px;
+          }
 
           &:hover {
             background-color: #e02900;
@@ -142,6 +211,17 @@ export default {
       background-color: #ffffff;
       padding: 32px 34px 52px 35px;
 
+      @include screen-lg {
+        width: 390px;
+        height: 300px;
+        padding: 10px 7px 10px 7px;
+      }
+      @include screen-md {
+        width: 350px;
+        height: 280px;
+        padding: 18px 15px 25px 15px;
+      }
+
       .card-header {
         display: flex;
         align-items: center;
@@ -152,6 +232,11 @@ export default {
             height: 90px;
             object-fit: contain;
             border-radius: 50%;
+
+            @include screen-md {
+              width: 70px;
+              height: 70px;
+            }
           }
         }
         .details {
@@ -165,6 +250,10 @@ export default {
             font-weight: 400;
             line-height: 29px;
 
+            @include screen-md {
+              font-size: 15px;
+            }
+
             &.name {
               color: #09d4a1;
             }
@@ -175,13 +264,22 @@ export default {
         }
       }
       .card-content {
-        p {
+        > p {
           margin: 45px 0 34px;
           color: #949494;
           font-family: Rubik;
           font-size: 18px;
           font-style: italic;
           line-height: 29px;
+          text-align: left;
+
+          @include screen-lg {
+            margin: 25px 0 25px;
+          }
+          @include screen-md {
+            margin: 12px 0 12px;
+            font-size: 16px;
+          }
         }
         .hotel-prices {
           display: flex;
@@ -205,6 +303,10 @@ export default {
               font-family: Rubik;
               font-size: 20px;
               font-weight: 500;
+
+              @include screen-md {
+                font-size: 16px;
+              }
             }
             span {
               color: #949494;
@@ -213,6 +315,10 @@ export default {
               font-weight: 400;
               line-height: 29px;
               text-decoration: line-through;
+
+              @include screen-md {
+                font-size: 20px;
+              }
             }
           }
         }

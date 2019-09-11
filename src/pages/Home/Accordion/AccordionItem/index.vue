@@ -57,6 +57,10 @@ export default {
   border-radius: 4px;
   background-color: #ffffff;
   margin-bottom: 36px;
+
+  @include screen-md {
+    margin-bottom: 28px;
+  }
 }
 
 .accordion-item-trigger {
@@ -75,6 +79,10 @@ export default {
   align-items: center;
   cursor: pointer;
 
+  @include screen-md {
+    height: 60px;
+  }
+
   h4 {
     font-size: 1.25rem;
     margin-bottom: 0;
@@ -84,6 +92,10 @@ export default {
     font-family: Poppins;
     font-size: 20px;
     font-weight: 600;
+
+    @include screen-md {
+      font-size: 16px;
+    }
   }
 }
 
@@ -105,6 +117,10 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   transition: all 0.2s ease;
+
+  @include screen-md {
+    font-size: 23px;
+  }
 }
 
 .accordion-item-details {
@@ -112,6 +128,10 @@ export default {
   margin: 0;
   padding: 0 23px 23px 23px;
   background-color: #ffffff;
+
+  @include screen-md {
+    padding: 0 18px 18px 18px;
+  }
 }
 
 .accordion-item-details-inner {
@@ -125,6 +145,10 @@ export default {
     font-weight: 400;
     line-height: 29px;
     margin: 0;
+
+    @include screen-md {
+      font-size: 14px;
+    }
   }
 }
 

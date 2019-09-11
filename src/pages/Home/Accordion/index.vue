@@ -40,10 +40,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/constants/constants.scss";
+
 .accordion {
   padding: 0;
   width: 706px;
   margin: 30px auto 0;
+
+  @include screen-md {
+    margin: 20px auto 0;
+    width: 550px;
+  }
 
   div:not(:last-child) {
     border-bottom: 1px solid rgba(10, 10, 10, 0.1);

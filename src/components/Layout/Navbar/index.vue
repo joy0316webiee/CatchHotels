@@ -80,6 +80,14 @@ export default {
   justify-content: space-between;
   background-color: white;
 
+  @include screen-lg {
+    width: 1100px;
+  }
+  @include screen-md {
+    width: 850px;
+    height: 60px;
+  }
+
   .logo {
     cursor: pointer;
     span {
@@ -87,6 +95,10 @@ export default {
       font-family: "Sign Painter House Script";
       font-size: 36px;
       font-weight: 400;
+
+      @include screen-md {
+        font-size: 32px;
+      }
     }
   }
   ul {
@@ -98,12 +110,20 @@ export default {
     align-items: center;
     justify-content: space-between;
 
+    @include screen-md {
+      width: 700px;
+    }
+
     li {
       color: #091613;
       font-family: Rubik;
       font-size: 18px;
       font-weight: 400;
       cursor: pointer;
+
+      @include screen-md {
+        font-size: 15px;
+      }
 
       &.active {
         color: #09d4a1;

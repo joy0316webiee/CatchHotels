@@ -12,6 +12,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/constants/constants.scss";
+
 .subscribe-wrapper {
   width: 487px;
   height: 74px;
@@ -23,6 +25,12 @@ export default {
   align-items: center;
   justify-content: space-between;
 
+  @include screen-md {
+    width: 400px;
+    height: 60px;
+    padding: 6px;
+  }
+
   input {
     height: 100%;
     margin-left: 20px;
@@ -31,6 +39,10 @@ export default {
     font-size: 16px;
     font-weight: 400;
     border: none;
+
+    @include screen-md {
+      font-size: 14px;
+    }
   }
   button {
     width: 185px;
@@ -43,6 +55,10 @@ export default {
     font-size: 17px;
     font-weight: 500;
     cursor: pointer;
+
+    @include screen-md {
+      font-size: 15px;
+    }
 
     &:hover {
       background-color: #e02900;
