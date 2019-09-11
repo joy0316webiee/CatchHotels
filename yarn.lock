@@ -638,6 +638,11 @@ autoprefixer@^9.5.1:
     postcss "^7.0.17"
     postcss-value-parser "^4.0.0"
 
+awesome-phonenumber@^2.15.0:
+  version "2.18.0"
+  resolved "https://registry.yarnpkg.com/awesome-phonenumber/-/awesome-phonenumber-2.18.0.tgz#d9d66b1b357f3ee1d729c5c28dc9d08bfede2b32"
+  integrity sha512-JHh1k2QbhiULj6JwFlhOlO6jPL7OZat9Ytm8v5834+CbvqLEeLPKdUS28pLD/IvfAIFD7nqPyitqO3bYBUIIoA==
+
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -6644,6 +6649,11 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.0.tgz#bd76d6a23323e2ca8ffa12028dc04559c75f9019"
   integrity sha512-iq+S7vZJE60yejDYM0ek6zg308+UZsdtPExWP9VZoCFCz1zkJoXFnAX7aZfd/ZwrkidzdUZL0C/ryW+JwAiIGw==
 
+vue-click-outside@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/vue-click-outside/-/vue-click-outside-1.0.7.tgz#cdd2b1605e3c4944784e1794eae4a12a0f700bd6"
+  integrity sha1-zdKxYF48SUR4TheU6uShKg9wC9Y=
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.3.tgz#2756f46cb3258054c5f4723de8ae7e87302a1ccf"
@@ -6673,6 +6683,13 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
+vue-tel-input@^3.1.8:
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/vue-tel-input/-/vue-tel-input-3.1.8.tgz#dcfc2ec7e672dfb814f7f5938734eca5218b12ff"
+  integrity sha512-Jv0FxkYRZxLemmRO5M2lrl6/JPBNlOI7YlxQc7nNrNLT0l+QPWWGyStiQODT+SmCFkCL3VYI1fnGbsVomuvhtA==
+  dependencies:
+    awesome-phonenumber "^2.15.0"
+
 vue-template-compiler@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.10.tgz#323b4f3495f04faa3503337a82f5d6507799c9cc"
@@ -6690,6 +6707,11 @@ vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
+
+vueperslides@^1.20.1:
+  version "1.20.1"
+  resolved "https://registry.yarnpkg.com/vueperslides/-/vueperslides-1.20.1.tgz#3e61400036a648026612ced55a01b787a2fbfc71"
+  integrity sha512-B7efnDFXSBtJE++deiXUvwuKmyZztuudb0yXjEHwLaLExNgeVsuK4Cb0B19XDi1j+mwL4fZ3ErGBiTqbmJDdjA==
 
 vuex@^3.0.1:
   version "3.1.1"
