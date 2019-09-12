@@ -43,6 +43,10 @@ export default {
     height: 300px;
     padding: 50px 0px 35px;
   }
+  @include screen-sm {
+    height: 247px;
+    padding: 18px 0px 20px;
+  }
 
   .container {
     width: 1290px;
@@ -54,11 +58,19 @@ export default {
     @include screen-md {
       width: 850px;
     }
+    @include screen-sm {
+      width: 100%;
+      padding: 0 10px;
+    }
 
     .newsletter {
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      @include screen-sm {
+        flex-direction: column;
+      }
 
       h2 {
         color: #ffffff;
@@ -70,10 +82,17 @@ export default {
         @include screen-md {
           font-size: 40px;
         }
+        @include screen-sm {
+          font-size: 30px;
+        }
       }
       .subscribe {
         display: flex;
         align-items: center;
+
+        @include screen-sm {
+          flex-direction: column;
+        }
 
         p {
           width: 122px;
@@ -86,6 +105,11 @@ export default {
           @include screen-md {
             font-size: 15px;
             width: 110px;
+          }
+          @include screen-sm {
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
           }
         }
       }
@@ -100,6 +124,10 @@ export default {
         margin-top: 60px;
         margin-bottom: 38px;
       }
+      @include screen-sm {
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
     }
     .info {
       position: relative;
@@ -112,6 +140,10 @@ export default {
         font-weight: 400;
         line-height: 30px;
 
+        @include screen-xs {
+          font-size: 10px;
+        }
+
         &.copyright {
           text-align: center;
         }
@@ -120,6 +152,10 @@ export default {
           right: 0;
           top: -50%;
           transform: translateY(50%);
+
+          @include screen-sm {
+            display: none;
+          }
 
           strong {
             color: #09d4a1;

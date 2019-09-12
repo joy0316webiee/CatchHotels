@@ -3,17 +3,25 @@
     <div class="logo">
       <span>CatchHotels</span>
     </div>
-    <ul class="menu">
+    <ul class="menu" :class="classes.menu()">
       <li
         v-for="({id, label}) in menuItems"
         :key="id"
         :class="activeClass(id)"
         @click="onSelectMenuItem(id)"
       >{{label}}</li>
-      <li>
+      <li class="lang">
         <LanguageSelector />
       </li>
+      <li class="close" @click="closeHamburgerMenu()">
+        <img src="@/assets/images/ic_close.png" alt="close" />
+      </li>
     </ul>
+    <div class="hamburger-button" @click="openHamburgerMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </template>
 
@@ -53,15 +61,26 @@ export default {
           label: "Contact"
         }
       ],
-      selectedMenuItem: 0
+      selectedMenuItem: 0,
+      openedHamburgerMenu: false,
+      classes: {
+        menu: () => [{ "hamhurger-opened": this.openedHamburgerMenu }]
+      }
     };
   },
   methods: {
     activeClass(id) {
       return [{ active: id === this.selectedMenuItem }];
     },
+    openHamburgerMenu() {
+      this.openedHamburgerMenu = true;
+    },
+    closeHamburgerMenu() {
+      this.openedHamburgerMenu = false;
+    },
     onSelectMenuItem(id) {
       this.selectedMenuItem = id;
+      this.closeHamburgerMenu();
     }
   }
 };
@@ -87,9 +106,18 @@ export default {
     width: 850px;
     height: 60px;
   }
+  @include screen-sm {
+    width: 100%;
+    padding: 13px 20px;
+  }
+  @include screen-xs {
+    height: 42px;
+    padding: 13px 10px;
+  }
 
   .logo {
     cursor: pointer;
+
     span {
       color: #09d4a1;
       font-family: "Sign Painter House Script";
@@ -98,6 +126,9 @@ export default {
 
       @include screen-md {
         font-size: 32px;
+      }
+      @include screen-xs {
+        font-size: 24px;
       }
     }
   }
@@ -113,16 +144,53 @@ export default {
     @include screen-md {
       width: 700px;
     }
+    @include screen-sm {
+      position: fixed;
+      right: -250px;
+      top: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      z-index: 10;
+      width: 222px;
+      height: 100vh;
+      background-color: #000000;
+      padding: 58px 16px 0 34px;
+      transition: right 0.5s ease-out;
+
+      &.hamhurger-opened {
+        right: 0;
+
+        &::before {
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          content: "";
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
 
     li {
       color: #091613;
       font-family: Rubik;
       font-size: 18px;
       font-weight: 400;
+      /* overflow: hidden; */
+      white-space: nowrap;
+      text-overflow: clip;
       cursor: pointer;
 
       @include screen-md {
         font-size: 15px;
+      }
+      @include screen-sm {
+        position: relative;
+        font-size: 16px;
+        color: #ffffff;
+        margin-bottom: 25px;
       }
 
       &.active {
@@ -138,8 +206,53 @@ export default {
           position: absolute;
           left: 0;
           top: calc(100% + 22px);
+
+          @include screen-md {
+            top: calc(100% + 18px);
+          }
+          @include screen-sm {
+            display: none;
+          }
         }
       }
+      &.lang {
+        @include screen-sm {
+          display: none;
+        }
+      }
+      &.close {
+        display: none;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+
+        @include screen-sm {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  .hamburger-button {
+    display: none;
+    height: 16px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    @include screen-sm {
+      display: flex;
+
+      &:hover > span {
+        background-color: darken(#09d4a1, 5%);
+      }
+    }
+
+    span {
+      width: 28px;
+      height: 2px;
+      border-radius: 1px;
+      background-color: #09d4a1;
     }
   }
 }

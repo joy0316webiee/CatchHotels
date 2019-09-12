@@ -22,4 +22,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.layout-wrapper {
+  position: relative;
+  overflow: hidden;
+}
 </style>

@@ -51,6 +51,12 @@ export default {
     margin: 20px auto 0;
     width: 550px;
   }
+  @include screen-sm {
+    width: 400px;
+  }
+  @include screen-xs {
+    width: 300px;
+  }
 
   div:not(:last-child) {
     border-bottom: 1px solid rgba(10, 10, 10, 0.1);

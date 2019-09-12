@@ -61,6 +61,12 @@ export default {
   @include screen-md {
     margin-bottom: 28px;
   }
+  @include screen-sm {
+    margin-bottom: 25px;
+  }
+  @include screen-xs {
+    margin-bottom: 20px;
+  }
 }
 
 .accordion-item-trigger {
@@ -81,6 +87,9 @@ export default {
 
   @include screen-md {
     height: 60px;
+  }
+  @include screen-xs {
+    height: 50px;
   }
 
   h4 {

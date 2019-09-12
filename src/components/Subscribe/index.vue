@@ -30,6 +30,10 @@ export default {
     height: 60px;
     padding: 6px;
   }
+  @include screen-xs {
+    width: 300px;
+    height: 46px;
+  }
 
   input {
     height: 100%;
@@ -54,10 +58,17 @@ export default {
     font-family: Rubik;
     font-size: 17px;
     font-weight: 500;
+    border: none;
     cursor: pointer;
 
     @include screen-md {
       font-size: 15px;
+    }
+    @include screen-xs {
+      width: 114px;
+      height: 34px;
+      border-radius: 2px;
+      font-size: 12px;
     }
 
     &:hover {

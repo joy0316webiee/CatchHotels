@@ -18,16 +18,13 @@
 }
 
 @mixin screen-sm {
-  @media (max-width: 300px) {
+  @media (max-width: 970px) {
     @content;
   }
 }
 
 @mixin screen-xs {
-  @media (max-width: 300px) {
+  @media (max-width: 470px) {
     @content;
   }
-}
-
-@mixin screen-xxs {
 }

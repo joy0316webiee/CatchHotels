@@ -10,6 +10,9 @@
       </div>
 
       <div class="reserv-hotel">
+        <div class="lets-start">
+          <h2>Let's start</h2>
+        </div>
         <div class="reserv-header">
           <div class="do-not-have">
             <RadioButton
@@ -53,7 +56,7 @@
                     :class="classes.service(id)"
                     @click="onServiceSelect(id)"
                   >
-                    <img :src="images.service(id)" alt="service" />
+                    <img :src="images.service(id)" :alt="id" />
                   </div>
                 </div>
               </div>
@@ -66,7 +69,7 @@
       </div>
     </section>
 
-    <section class="how-it-works">
+    <section :class="classes.howitworksWrapper()">
       <h2>How it works</h2>
 
       <div v-if="hasReservation" class="have-already">
@@ -231,8 +234,8 @@
       <label>Newsletter</label>
       <h2>Can't book right now?</h2>
       <p>
-        Don't need to make a booking right now but dont wnat to forget us?
-        Sign up to our highly ocassional newsletter
+        Don't need to make a booking right now but don't want to forget us?
+        <br />Sign up to our highly ocassional newsletter
       </p>
 
       <div class="subscribe">
@@ -378,7 +381,8 @@ export default {
         }
       ],
       classes: {
-        service: id => ["service", { active: id === this.selectedService }]
+        service: id => ["service", { active: id === this.selectedService }],
+        howitworksWrapper: () => ["how-it-works", { low: this.hasReservation }]
       },
       images: {
         service: id => require(`@/assets/images/${id}.png`)
@@ -409,6 +413,12 @@ export default {
     @include screen-md {
       height: 400px;
     }
+    @include screen-xs {
+      height: 212px;
+      background-image: url("~@/assets/images/header_bg_mobile.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
 
     &:before {
       content: "";
@@ -436,6 +446,13 @@ export default {
       @include screen-md {
         width: 850px;
       }
+      @include screen-sm {
+        width: 80%;
+        text-align: center;
+      }
+      @include screen-xs {
+        width: 100%;
+      }
 
       .title {
         margin: 0px;
@@ -448,9 +465,21 @@ export default {
         @include screen-md {
           font-size: 60px;
         }
+        @include screen-sm {
+          font-size: 38px;
+        }
+        @include screen-xs {
+          top: 40px;
+          font-size: 26px;
+        }
       }
       .description {
         top: 107px;
+
+        @include screen-xs {
+          top: 57px;
+          padding: 0 33px 0 31px;
+        }
 
         p {
           margin: 0;
@@ -462,6 +491,14 @@ export default {
 
           @include screen-md {
             font-size: 17px;
+          }
+          @include screen-sm {
+            font-size: 15px;
+            line-height: 30px;
+          }
+          @include screen-xs {
+            font-size: 14px;
+            line-height: 20px;
           }
         }
       }
@@ -482,7 +519,37 @@ export default {
         width: 850px;
         bottom: 75px;
       }
+      @include screen-sm {
+        width: 100%;
+        max-width: 600px;
+      }
+      @include screen-xs {
+        bottom: 0px;
+        border-radius: 0px;
+      }
 
+      .lets-start {
+        display: none;
+        height: 95px;
+
+        @include screen-sm {
+          display: block;
+        }
+
+        h2 {
+          text-align: center;
+          padding-top: 25px;
+          color: #000000;
+          font-family: Poppins;
+          font-size: 33px;
+          font-weight: 600;
+
+          @include screen-xs {
+            font-size: 24px;
+            margin: 0;
+          }
+        }
+      }
       .reserv-header {
         height: 72px;
         border-radius: 4px 4px 0 0;
@@ -493,6 +560,10 @@ export default {
 
         @include screen-md {
           height: 60px;
+        }
+        @include screen-xs {
+          padding: 14px 0px 15px 10px;
+          height: 38px;
         }
 
         > div {
@@ -505,6 +576,9 @@ export default {
             @include screen-md {
               margin-left: 30px;
             }
+            @include screen-xs {
+              margin-left: 4px;
+            }
           }
 
           span {
@@ -512,6 +586,10 @@ export default {
 
             @include screen-md {
               font-size: 15px;
+            }
+            @include screen-xs {
+              font-size: 12px;
+              margin-left: 4px;
             }
           }
         }
@@ -521,6 +599,14 @@ export default {
 
         @include screen-md {
           height: 100px;
+        }
+        @include screen-sm {
+          background-color: #f7f7f7;
+          height: auto;
+          padding-bottom: 20px;
+        }
+        @include screen-xs {
+          padding-bottom: 14px;
         }
 
         .have-already {
@@ -538,6 +624,12 @@ export default {
             @include screen-md {
               font-size: 15px;
             }
+            @include screen-xs {
+              padding: 10px 25px 0 14px;
+              font-size: 14px;
+              line-height: 20px;
+              font-weight: 500;
+            }
 
             strong {
               color: #ff3d11;
@@ -549,6 +641,10 @@ export default {
           display: flex;
           align-items: center;
           height: 100%;
+
+          @include screen-sm {
+            flex-direction: column;
+          }
 
           .info {
             width: 100%;
@@ -564,6 +660,13 @@ export default {
             @include screen-md {
               padding: 12px 50px 12px 30px;
             }
+            @include screen-sm {
+              padding: 12px 10px 37px 10px;
+              flex-direction: column;
+            }
+            @include screen-xs {
+              padding: 12px 10px 28px 10px;
+            }
 
             span {
               color: #949494;
@@ -574,11 +677,18 @@ export default {
               @include screen-md {
                 font-size: 14px;
               }
+              @include screen-sm {
+                color: #091613;
+              }
             }
 
             .email {
               display: flex;
               flex-direction: column;
+
+              @include screen-sm {
+                width: 100%;
+              }
 
               input {
                 margin-top: 9px;
@@ -598,6 +708,12 @@ export default {
                   height: 40px;
                   font-size: 14px;
                 }
+                @include screen-sm {
+                  width: 100%;
+                }
+                @include screen-xs {
+                  font-size: 16px;
+                }
 
                 &::placeholder {
                   color: #8f8f8f;
@@ -605,6 +721,11 @@ export default {
               }
             }
             .booking-service {
+              @include screen-sm {
+                margin-top: 20px;
+                width: 100%;
+              }
+
               .services {
                 display: flex;
                 align-items: center;
@@ -614,6 +735,9 @@ export default {
 
                 @include screen-md {
                   width: 400px;
+                }
+                @include screen-sm {
+                  width: 100%;
                 }
 
                 .service {
@@ -642,7 +766,7 @@ export default {
                     @include screen-md {
                       max-width: 90px;
 
-                      &:nth-child(2) {
+                      &[alt="agoda"] {
                         max-width: 55px;
                       }
                     }
@@ -654,6 +778,11 @@ export default {
           .reserv-confirm {
             height: 100%;
 
+            @include screen-sm {
+              width: 100%;
+              padding: 0 10px;
+            }
+
             button {
               width: 232px;
               height: 100%;
@@ -664,15 +793,27 @@ export default {
               font-size: 21px;
               font-weight: 500;
               color: #ffffff;
+              border: none;
               cursor: pointer;
 
               @include screen-md {
                 width: 180px;
                 font-size: 16px;
               }
+              @include screen-sm {
+                width: 100%;
+                height: 50px;
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+                border-radius: 4px;
+                background-color: #09d4a1;
+              }
 
               &:hover {
                 background-color: #e02900;
+
+                @include screen-sm {
+                  background-color: #05ad83;
+                }
               }
             }
           }
@@ -690,6 +831,19 @@ export default {
       padding-top: 150px;
       height: 420px;
     }
+    @include screen-sm {
+      height: auto;
+      padding: 445px 0 63px;
+
+      &.low {
+        padding-top: 245px;
+      }
+    }
+    @include screen-xs {
+      &.low {
+        padding-top: 275px;
+      }
+    }
 
     h2 {
       text-align: center;
@@ -701,6 +855,12 @@ export default {
 
       @include screen-md {
         font-size: 38px;
+      }
+      @include screen-sm {
+        font-size: 33px;
+      }
+      @include screen-xs {
+        font-size: 24px;
       }
     }
 
@@ -718,6 +878,12 @@ export default {
         @include screen-lg {
           width: 650px;
         }
+        @include screen-sm {
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+        }
       }
       &.do-not-have {
         width: 1344px;
@@ -729,11 +895,29 @@ export default {
           margin-top: 25px;
           width: 900px;
         }
+        @include screen-sm {
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+        @include screen-xs {
+          margin-top: 17px;
+        }
       }
 
       .flow {
         width: 200px;
         height: 148px;
+
+        @include screen-sm {
+          width: 300px;
+          height: auto;
+          padding-top: 20px;
+          padding-bottom: 20px;
+        }
+        @include screen-xs {
+          width: 200px;
+        }
 
         .flow-diagram {
           .image {
@@ -769,6 +953,11 @@ export default {
                 width: 140px;
                 height: 35px;
               }
+              @include screen-sm {
+                width: 100%;
+                height: 45px;
+                padding: 9px 0 9px 12px;
+              }
 
               span {
                 color: #8f8f8f;
@@ -778,6 +967,9 @@ export default {
 
                 @include screen-md {
                   font-size: 13px;
+                }
+                @include screen-sm {
+                  font-size: 14px;
                 }
               }
             }
@@ -795,6 +987,10 @@ export default {
                 width: 144px;
                 height: 35px;
               }
+              @include screen-sm {
+                width: 100%;
+                height: 45px;
+              }
 
               span {
                 color: #ffffff;
@@ -804,6 +1000,9 @@ export default {
 
                 @include screen-md {
                   font-size: 15px;
+                }
+                @include screen-md {
+                  font-size: 18px;
                 }
               }
               img {
@@ -835,6 +1034,10 @@ export default {
                 width: 140px;
                 height: 35px;
               }
+              @include screen-sm {
+                width: 100%;
+                height: 45px;
+              }
 
               span {
                 color: #ffffff;
@@ -844,6 +1047,9 @@ export default {
 
                 @include screen-md {
                   font-size: 15px;
+                }
+                @include screen-sm {
+                  font-size: 18px;
                 }
               }
               img {
@@ -880,6 +1086,9 @@ export default {
                 @include screen-md {
                   font-size: 18px;
                 }
+                @include screen-sm {
+                  font-size: 20px;
+                }
               }
               img {
                 width: 49px;
@@ -894,6 +1103,12 @@ export default {
                   height: 35px;
                   right: 31px;
                   top: 6px;
+                }
+                @include screen-sm {
+                  width: 49px;
+                  height: 50px;
+                  right: 21px;
+                  top: 0px;
                 }
               }
             }
@@ -916,6 +1131,10 @@ export default {
                 @include screen-md {
                   width: 35px;
                   height: 30px;
+                }
+                @include screen-sm {
+                  width: 54px;
+                  height: 48px;
                 }
               }
               span {
@@ -941,6 +1160,12 @@ export default {
                   right: 50px;
                   top: 0px;
                 }
+                @include screen-sm {
+                  width: 27px;
+                  height: 27px;
+                  right: 37px;
+                  top: -11px;
+                }
               }
             }
           }
@@ -950,6 +1175,9 @@ export default {
 
           @include screen-md {
             margin-top: 35px;
+          }
+          @include screen-sm {
+            margin-top: 20px;
           }
 
           p {
@@ -962,6 +1190,9 @@ export default {
 
             @include screen-md {
               font-size: 12px;
+            }
+            @include screen-sm {
+              font-size: 16px;
             }
           }
         }
@@ -976,6 +1207,12 @@ export default {
         @include screen-md {
           width: 25px;
         }
+        @include screen-sm {
+          height: 30px;
+          flex-direction: column;
+          margin-top: 16px;
+          margin-bottom: 16px;
+        }
 
         span {
           width: 5px;
@@ -986,6 +1223,10 @@ export default {
           @include screen-md {
             width: 3px;
             height: 3px;
+          }
+          @include screen-sm {
+            width: 4px;
+            height: 4px;
           }
         }
       }
@@ -1002,6 +1243,14 @@ export default {
       height: 650px;
       padding: 70px 20px 70px;
     }
+    @include screen-sm {
+      padding: 20px 10px 20px;
+      height: 440px;
+    }
+    @include screen-xs {
+      height: auto;
+      padding: 20px 10px 50px;
+    }
 
     label {
       color: #09d4a1;
@@ -1011,6 +1260,15 @@ export default {
 
       @include screen-md {
         font-size: 19px;
+      }
+      @include screen-sm {
+        color: #000000;
+        font-family: Poppins;
+        font-size: 33px;
+        font-weight: 600;
+      }
+      @include screen-xs {
+        font-size: 24px;
       }
     }
     h2 {
@@ -1022,6 +1280,9 @@ export default {
 
       @include screen-md {
         font-size: 38px;
+      }
+      @include screen-sm {
+        display: none;
       }
     }
     p {
@@ -1036,6 +1297,9 @@ export default {
 
       @include screen-md {
         font-size: 15px;
+      }
+      @include screen-sm {
+        display: none;
       }
 
       strong {
@@ -1060,6 +1324,10 @@ export default {
       height: 430px;
       padding: 70px 0 70px;
     }
+    @include screen-sm {
+      padding: 24px 0 35px;
+      height: auto;
+    }
 
     label {
       color: #09d4a1;
@@ -1069,6 +1337,9 @@ export default {
 
       @include screen-md {
         font-size: 19px;
+      }
+      @include screen-sm {
+        display: none;
       }
     }
     h2 {
@@ -1080,6 +1351,12 @@ export default {
 
       @include screen-md {
         font-size: 38px;
+      }
+      @include screen-sm {
+        font-size: 33px;
+      }
+      @include screen-xs {
+        font-size: 24px;
       }
     }
     > p {
@@ -1096,6 +1373,22 @@ export default {
         width: 530px;
         font-size: 16px;
       }
+      @include screen-sm {
+        font-size: 15px;
+        width: 100%;
+        padding: 0 10px;
+      }
+      @include screen-xs {
+        font-size: 14px;
+      }
+
+      br {
+        display: none;
+
+        @include screen-md {
+          display: inline;
+        }
+      }
     }
 
     .subscribe {
@@ -1104,6 +1397,9 @@ export default {
 
       @include screen-md {
         width: 400px;
+      }
+      @include screen-xs {
+        width: 300px;
       }
 
       p {
@@ -1115,6 +1411,9 @@ export default {
 
         @include screen-md {
           font-size: 13px;
+        }
+        @include screen-xs {
+          font-size: 10px;
         }
       }
     }
@@ -1128,6 +1427,9 @@ export default {
     @include screen-md {
       padding: 70px 0 70px;
     }
+    @include screen-sm {
+      padding: 40px 0 40px;
+    }
 
     label {
       color: #09d4a1;
@@ -1137,6 +1439,16 @@ export default {
 
       @include screen-md {
         font-size: 19px;
+      }
+      @include screen-sm {
+        color: #091613;
+        font-family: Poppins;
+        font-size: 33px;
+        font-weight: 600;
+        line-height: 30px;
+      }
+      @include screen-xs {
+        font-size: 24px;
       }
     }
     h2 {
@@ -1148,6 +1460,9 @@ export default {
 
       @include screen-md {
         font-size: 38px;
+      }
+      @include screen-sm {
+        display: none;
       }
     }
   }
@@ -1161,6 +1476,10 @@ export default {
       padding: 70px 0 70px;
       height: 700px;
     }
+    @include screen-sm {
+      padding: 40px 0 40px;
+      height: auto;
+    }
 
     h2 {
       color: #000000;
@@ -1172,6 +1491,12 @@ export default {
       @include screen-md {
         font-size: 38px;
       }
+      @include screen-sm {
+        font-size: 33px;
+      }
+      @include screen-xs {
+        font-size: 24px;
+      }
     }
     p {
       color: #949494;
@@ -1182,6 +1507,11 @@ export default {
       @include screen-md {
         font-size: 17px;
       }
+      @include screen-sm {
+        width: 237px;
+        font-size: 16px;
+        margin: 0 auto;
+      }
     }
 
     .form {
@@ -1191,6 +1521,13 @@ export default {
       @include screen-md {
         margin: 35px auto 0;
         width: 550px;
+      }
+      @include screen-sm {
+        margin: 18px auto 0;
+        width: 400px;
+      }
+      @include screen-xs {
+        width: 300px;
       }
 
       > * {
@@ -1206,6 +1543,9 @@ export default {
 
         @include screen-md {
           padding: 15px 15px 15px 27px;
+        }
+        @include screen-xs {
+          margin-bottom: 16px;
         }
 
         ::placeholder {
@@ -1229,6 +1569,9 @@ export default {
           height: 130px;
           font-size: 15px;
         }
+        @include screen-xs {
+          height: 100px;
+        }
       }
       > button {
         height: 76px;
@@ -1239,11 +1582,18 @@ export default {
         font-family: Rubik;
         font-size: 22px;
         font-weight: 500;
+        border: none;
         cursor: pointer;
 
         @include screen-md {
           height: 65px;
           font-size: 18px;
+        }
+        @include screen-sm {
+          font-size: 16px;
+        }
+        @include screen-xs {
+          height: 50px;
         }
 
         &:hover {

@@ -24,8 +24,8 @@ export default {
         required: false,
         enabledCountryCode: true,
         enabledFlags: true,
-        preferredCountries: [],
-        onlyCountries: ["CZ", "US"],
+        preferredCountries: ["CZ", "US"],
+        onlyCountries: [],
         ignoredCountries: [],
         autocomplete: "off",
         name: "telephone",
@@ -48,8 +48,13 @@ export default {
 @import "@/constants/constants.scss";
 
 .phone-input__wrapper {
+  padding: 10px 30px 10px 37px !important;
+
   @include screen-md {
     padding: 2px 15px 2px 18px !important;
+  }
+  @include screen-xs {
+    padding: 0px 15px 0px 17px !important;
   }
 
   .telephone-wrapper {
@@ -60,6 +65,10 @@ export default {
       .selection {
         width: 104px;
         justify-content: space-between;
+
+        @include screen-xs {
+          width: 90px;
+        }
 
         .country-code {
           height: 45px;
@@ -72,6 +81,11 @@ export default {
 
           @include screen-md {
             font-size: 16px;
+          }
+          @include screen-xs {
+            margin-left: 0px;
+            height: 30px;
+            line-height: 30px;
           }
         }
       }
@@ -93,6 +107,9 @@ export default {
 
       @include screen-md {
         font-size: 15px;
+      }
+      @include screen-xs {
+        padding-left: 10px;
       }
 
       &::placeholder {

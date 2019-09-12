@@ -66,6 +66,11 @@ export default {
         1340: {
           visibleSlides: 2,
           slideRatio: 1 / 3
+        },
+        970: {
+          visibleSlides: 1,
+          slideRatio: 3 / 4,
+          arrows: false
         }
       }
     };
@@ -86,6 +91,12 @@ export default {
   }
   @include screen-md {
     width: 800px;
+  }
+  @include screen-sm {
+    width: 400px;
+  }
+  @include screen-xs {
+    width: 300px;
   }
 
   .vueperslides__bullet {
@@ -110,6 +121,11 @@ export default {
 
     @include screen-md {
       margin-top: 60px;
+    }
+  }
+  .vueperslides__bullets {
+    @include screen-sm {
+      bottom: -40px;
     }
   }
   .vueperslides__arrow {
@@ -151,6 +167,9 @@ export default {
         @include screen-md {
           padding: 60px 30px;
         }
+        @include screen-xs {
+          padding: 40px 27px;
+        }
 
         h3 {
           margin: 0;
@@ -162,6 +181,9 @@ export default {
 
           @include screen-md {
             font-size: 22px;
+          }
+          @include screen-xs {
+            font-size: 14px;
           }
         }
         p {
@@ -175,6 +197,10 @@ export default {
           @include screen-md {
             font-size: 16px;
           }
+          @include screen-xs {
+            font-size: 13px;
+            margin: 5px 0 5px;
+          }
         }
         button {
           margin-top: 60px;
@@ -183,6 +209,7 @@ export default {
           box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16);
           border-radius: 4px;
           background-color: #ff3d11;
+          border: none;
           color: #ffffff;
           font-family: Rubik;
           font-size: 18px;
@@ -194,6 +221,11 @@ export default {
             height: 45px;
             font-size: 16px;
             margin-top: 45px;
+          }
+          @include screen-xs {
+            width: 100%;
+            margin-top: 42px;
+            font-size: 13px;
           }
 
           &:hover {
@@ -221,6 +253,10 @@ export default {
         height: 280px;
         padding: 18px 15px 25px 15px;
       }
+      @include screen-xs {
+        height: 218px;
+        padding: 15px 30px;
+      }
 
       .card-header {
         display: flex;
@@ -237,6 +273,10 @@ export default {
               width: 70px;
               height: 70px;
             }
+            @include screen-xs {
+              width: 60px;
+              height: 60px;
+            }
           }
         }
         .details {
@@ -252,6 +292,9 @@ export default {
 
             @include screen-md {
               font-size: 15px;
+            }
+            @include screen-xs {
+              font-size: 14px;
             }
 
             &.name {
@@ -280,6 +323,10 @@ export default {
             margin: 12px 0 12px;
             font-size: 16px;
           }
+          @include screen-xs {
+            margin: 8px 0 8px;
+            font-size: 13px;
+          }
         }
         .hotel-prices {
           display: flex;
@@ -307,6 +354,10 @@ export default {
               @include screen-md {
                 font-size: 16px;
               }
+              @include screen-xs {
+                font-size: 14px;
+                margin: 0 0 5px;
+              }
             }
             span {
               color: #949494;
@@ -318,6 +369,9 @@ export default {
 
               @include screen-md {
                 font-size: 20px;
+              }
+              @include screen-xs {
+                font-size: 17px;
               }
             }
           }
