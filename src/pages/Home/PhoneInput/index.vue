@@ -1,15 +1,10 @@
 <template>
   <div class="phone-input__wrapper">
-    <vue-tel-input v-model="phone" v-bind="bindProps" />
+    <vue-tel-input @input="onTelChange" v-model="phone" v-bind="bindProps" />
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import VueTelInput from "vue-tel-input";
-
-Vue.use(VueTelInput);
-
 export default {
   name: "PhoneInput",
   data() {
@@ -21,7 +16,7 @@ export default {
         disabled: false,
         disabledFormatting: false,
         placeholder: "Phone number*",
-        required: false,
+        required: true,
         enabledCountryCode: true,
         enabledFlags: true,
         preferredCountries: ["CZ", "US"],
@@ -30,6 +25,7 @@ export default {
         autocomplete: "off",
         name: "telephone",
         maxLen: 25,
+        validCharactersOnly: true,
         wrapperClasses: "telephone-wrapper",
         inputClasses: "telephone-input",
         dropdownOptions: {
@@ -37,9 +33,15 @@ export default {
         },
         inputOptions: {
           showDialCode: false
-        }
+        },
+        mode: "international"
       }
     };
+  },
+  methods: {
+    onTelChange(number) {
+      this.$emit("onChange", number);
+    }
   }
 };
 </script>

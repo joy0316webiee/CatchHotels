@@ -1,13 +1,42 @@
 <template>
   <div class="subscribe-wrapper">
-    <input type="text" placeholder="Your email.... " />
-    <button>subscribe</button>
+    <input v-model="subscribeEmail" type="text" placeholder="Your email.... " />
+    <button @click="onSubmit">subscribe</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Subscribe"
+  name: "Subscribe",
+  props: {
+    onSubcribe: Function
+  },
+  data() {
+    return {
+      subscribeEmail: ""
+    };
+  },
+  methods: {
+    onSubmit() {
+      const { success, message } = this.onSubcribe(this.subscribeEmail);
+
+      if (success) {
+        this.$notify({
+          group: "notify",
+          type: "success",
+          title: "Subscribe Newsletter",
+          text: message
+        });
+      } else {
+        this.$notify({
+          group: "notify",
+          type: "error",
+          title: "Subscribe Newsletter",
+          text: "Faild, try again!"
+        });
+      }
+    }
+  }
 };
 </script>
 

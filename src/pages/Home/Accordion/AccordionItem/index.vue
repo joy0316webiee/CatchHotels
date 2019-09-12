@@ -1,9 +1,9 @@
 <template>
-  <div class="accordion-item" :class="{'is-active': item.active}" :id="groupId + '-' + item.id">
+  <div class="accordion-item" :class="{'is-active': active}" :id="groupId + '-' + item.id">
     <dt class="accordion-item-title">
       <button @click="toggle" class="accordion-item-trigger">
-        <h4 class="accordion-item-title-text">{{item.question}}</h4>
-        <span class="accordion-item-trigger-icon">{{item.active ? '-' : '+'}}</span>
+        <h4 class="accordion-item-title-text">{{item.title}}</h4>
+        <span class="accordion-item-trigger-icon">{{active ? '-' : '+'}}</span>
       </button>
     </dt>
     <transition
@@ -13,9 +13,9 @@
       @before-leave="startTransition"
       @after-leave="endTransition"
     >
-      <dd v-if="item.active" class="accordion-item-details">
+      <dd v-if="active" class="accordion-item-details">
         <div class="accordion-item-details-inner">
-          <p>{{item.answer}}</p>
+          <p>{{item.explanation}}</p>
         </div>
       </dd>
     </transition>
@@ -25,19 +25,15 @@
 <script>
 export default {
   name: "AccordionItem",
-  props: ["item", "multiple", "groupId"],
+  props: ["item", "groupId"],
+  data() {
+    return {
+      active: false
+    };
+  },
   methods: {
     toggle(event) {
-      if (this.multiple) this.item.active = !this.item.active;
-      else {
-        this.$parent.$children.forEach((item, index) => {
-          if (
-            item.$el.id === event.currentTarget.parentElement.parentElement.id
-          )
-            item.item.active = !item.item.active;
-          else item.item.active = false;
-        });
-      }
+      this.active = !this.active;
     },
     startTransition(el) {
       el.style.height = el.scrollHeight + "px";

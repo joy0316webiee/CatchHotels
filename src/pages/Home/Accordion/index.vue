@@ -1,12 +1,6 @@
 <template>
   <dl class="accordion box" role="presentation">
-    <AccordionItem
-      v-for="item in content"
-      :multiple="multiple"
-      :item="item"
-      :groupId="groupId"
-      :key="item.id"
-    />
+    <AccordionItem v-for="item in content" :item="item" :groupId="groupId" :key="item.id" />
   </dl>
 </template>
 
@@ -35,6 +29,7 @@ export default {
   },
   mounted() {
     this.groupId = this.$el.id;
+    this.content.sort((a, b) => a.order - b.order);
   }
 };
 </script>

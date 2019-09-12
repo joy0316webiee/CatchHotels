@@ -45,7 +45,7 @@
             <div class="info">
               <div class="email">
                 <span>E-mail</span>
-                <input type="email" placeholder="your@email.com" />
+                <input v-model="reservationEmail" type="email" placeholder="your@email.com" />
               </div>
               <div class="booking-service">
                 <span>Choose booking service</span>
@@ -62,7 +62,7 @@
               </div>
             </div>
             <div class="reserv-confirm">
-              <button>Reserv hotel</button>
+              <button @click="onReserveHotel">Reserv hotel</button>
             </div>
           </div>
         </div>
@@ -239,7 +239,7 @@
       </p>
 
       <div class="subscribe">
-        <Subscribe />
+        <Subscribe :onSubcribe="services.subscribeNewsletter" />
         <p>
           By clicking the subscribe button you agree to our
           <u>T&C</u>
@@ -258,12 +258,7 @@
       <h2>Contact</h2>
       <p>Fancy getting in touch with us? Leave us a message</p>
 
-      <div class="form">
-        <input type="email" placeholder="Email address*" />
-        <PhoneInput />
-        <textarea placeholder="Message*" />
-        <button>SEND</button>
-      </div>
+      <Contact :onSend="services.writeUs" />
     </section>
   </div>
 </template>
@@ -273,8 +268,9 @@ import RadioButton from "@/components/RadioButton";
 import Subscribe from "@/components/Subscribe";
 import Carousel from "./Carousel";
 import Accordion from "./Accordion";
-import PhoneInput from "./PhoneInput";
+import Contact from "./Contact";
 import { code2sign } from "@/helpers/String";
+import services from "@/services";
 
 export default {
   name: "Home",
@@ -283,10 +279,12 @@ export default {
     Carousel,
     Subscribe,
     Accordion,
-    PhoneInput
+    Contact
   },
   data() {
     return {
+      services,
+      reservationEmail: "",
       hasReservation: false,
       bookingServices: ["booking", "agoda", "hotels"],
       selectedService: "booking",
@@ -339,45 +337,45 @@ export default {
       faqItems: [
         {
           id: 1,
-          active: false,
-          question: "How does this work?",
-          answer:
-            "Good one, You might have already noticed that quite often you get a better price if you book last minute deal. Plane tickets, tours, food that is about to expire,... Well and hotel rooms are no exception to this. CatchHotels.com allows you to combine the luxury of having a hotel reservation sorted ahead of time with helping you get the best price by keeping an eye on the price. Once the same room on the same dates gets discounted, we will let you know."
+          title: "How does this work?",
+          explanation:
+            "Good one, You might have already noticed that quite often you get a better price if you book last minute deal. Plane tickets, tours, food that is about to expire,... Well and hotel rooms are no exception to this. CatchHotels.com allows you to combine the luxury of having a hotel reservation sorted ahead of time with helping you get the best price by keeping an eye on the price. Once the same room on the same dates gets discounted, we will let you know.",
+          order: 1
         },
         {
           id: 2,
-          active: false,
-          question: "How much does this service cost?",
-          answer:
-            "Nothing. Zero. It is and it always will be absolutley free of charge"
+          title: "How much does this service cost?",
+          explanation:
+            "Nothing. Zero. It is and it always will be absolutley free of charge",
+          order: 2
         },
         {
           id: 3,
-          active: false,
-          question: "So how do you guys make money?",
-          answer:
-            "Good one, You might have already noticed that quite often you get a better price if you book last minute deal. Plane tickets, tours, food that is about to expire,... Well and hotel rooms are no exception to this. CatchHotels.com allows you to combine the luxury of having a hotel reservation sorted ahead of time with helping you get the best price by keeping an eye on the price. Once the same room on the same dates gets discounted, we will let you know."
+          title: "So how do you guys make money?",
+          explanation:
+            "Good one, You might have already noticed that quite often you get a better price if you book last minute deal. Plane tickets, tours, food that is about to expire,... Well and hotel rooms are no exception to this. CatchHotels.com allows you to combine the luxury of having a hotel reservation sorted ahead of time with helping you get the best price by keeping an eye on the price. Once the same room on the same dates gets discounted, we will let you know.",
+          order: 3
         },
         {
           id: 4,
-          active: false,
-          question: "Is it legal?",
-          answer:
-            "Good one, You might have already noticed that quite often you get a better price if you book last minute deal. Plane tickets, tours, food that is about to expire,... Well and hotel rooms are no exception to this. CatchHotels.com allows you to combine the luxury of having a hotel reservation sorted ahead of time with helping you get the best price by keeping an eye on the price. Once the same room on the same dates gets discounted, we will let you know."
+          title: "Is it legal?",
+          explanation:
+            "Good one, You might have already noticed that quite often you get a better price if you book last minute deal. Plane tickets, tours, food that is about to expire,... Well and hotel rooms are no exception to this. CatchHotels.com allows you to combine the luxury of having a hotel reservation sorted ahead of time with helping you get the best price by keeping an eye on the price. Once the same room on the same dates gets discounted, we will let you know.",
+          order: 4
         },
         {
           id: 5,
-          active: false,
-          question: "Does it work with every hotel?",
-          answer:
-            "Good one, You might have already noticed that quite often you get a better price if you book last minute deal. Plane tickets, tours, food that is about to expire,... Well and hotel rooms are no exception to this. CatchHotels.com allows you to combine the luxury of having a hotel reservation sorted ahead of time with helping you get the best price by keeping an eye on the price. Once the same room on the same dates gets discounted, we will let you know."
+          title: "Does it work with every hotel?",
+          explanation:
+            "Good one, You might have already noticed that quite often you get a better price if you book last minute deal. Plane tickets, tours, food that is about to expire,... Well and hotel rooms are no exception to this. CatchHotels.com allows you to combine the luxury of having a hotel reservation sorted ahead of time with helping you get the best price by keeping an eye on the price. Once the same room on the same dates gets discounted, we will let you know.",
+          order: 5
         },
         {
           id: 6,
-          active: false,
-          question: "Do you guarantee we will get a better deal?",
-          answer:
-            "Good one, You might have already noticed that quite often you get a better price if you book last minute deal. Plane tickets, tours, food that is about to expire,... Well and hotel rooms are no exception to this. CatchHotels.com allows you to combine the luxury of having a hotel reservation sorted ahead of time with helping you get the best price by keeping an eye on the price. Once the same room on the same dates gets discounted, we will let you know."
+          title: "Do you guarantee we will get a better deal?",
+          explanation:
+            "Good one, You might have already noticed that quite often you get a better price if you book last minute deal. Plane tickets, tours, food that is about to expire,... Well and hotel rooms are no exception to this. CatchHotels.com allows you to combine the luxury of having a hotel reservation sorted ahead of time with helping you get the best price by keeping an eye on the price. Once the same room on the same dates gets discounted, we will let you know.",
+          order: 6
         }
       ],
       classes: {
@@ -390,12 +388,41 @@ export default {
     };
   },
   methods: {
+    onReserveHotel() {
+      const { success, message } = services.reserveHotels(
+        this.reservationEmail,
+        this.selectedService
+      );
+
+      if (success) {
+        this.$notify({
+          group: "notify",
+          type: "success",
+          title: "Hotel Reservation",
+          text: message
+        });
+      } else {
+        this.$notify({
+          group: "notify",
+          type: "error",
+          title: "Hotel Reservation",
+          text: "Faild, try again!"
+        });
+      }
+    },
     onServiceSelect(id) {
       this.selectedService = id;
     },
     handleReservationSelected(value) {
       this.hasReservation = value;
     }
+  },
+  created() {
+    const { data: testimonials } = services.listAllTestimonials();
+    const { data: faq } = services.listAllFAQ();
+
+    if (testimonials) this.testimonialItems = testimonials;
+    if (faq) this.faqItems = faq;
   }
 };
 </script>
@@ -1511,94 +1538,6 @@ export default {
         width: 237px;
         font-size: 16px;
         margin: 0 auto;
-      }
-    }
-
-    .form {
-      margin: 46px auto 0;
-      width: 725px;
-
-      @include screen-md {
-        margin: 35px auto 0;
-        width: 550px;
-      }
-      @include screen-sm {
-        margin: 18px auto 0;
-        width: 400px;
-      }
-      @include screen-xs {
-        width: 300px;
-      }
-
-      > * {
-        width: 100%;
-        margin-bottom: 20px;
-        font-family: Rubik;
-        font-size: 18px;
-        font-weight: 400;
-        padding: 30px 30px 30px 37px;
-        border: 1px solid #c7c7c7;
-        background-color: #f7f7f7;
-        border-radius: 4px;
-
-        @include screen-md {
-          padding: 15px 15px 15px 27px;
-        }
-        @include screen-xs {
-          margin-bottom: 16px;
-        }
-
-        ::placeholder {
-          color: #949494;
-        }
-      }
-
-      > input {
-        height: 80px;
-
-        @include screen-md {
-          height: 60px;
-          font-size: 15px;
-        }
-      }
-      > textarea {
-        height: 160px;
-        resize: none;
-
-        @include screen-md {
-          height: 130px;
-          font-size: 15px;
-        }
-        @include screen-xs {
-          height: 100px;
-        }
-      }
-      > button {
-        height: 76px;
-        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16);
-        border-radius: 4px;
-        background-color: #ff3d11;
-        color: #ffffff;
-        font-family: Rubik;
-        font-size: 22px;
-        font-weight: 500;
-        border: none;
-        cursor: pointer;
-
-        @include screen-md {
-          height: 65px;
-          font-size: 18px;
-        }
-        @include screen-sm {
-          font-size: 16px;
-        }
-        @include screen-xs {
-          height: 50px;
-        }
-
-        &:hover {
-          background-color: #e02900;
-        }
       }
     }
   }
