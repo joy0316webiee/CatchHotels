@@ -1,7 +1,7 @@
 <template>
   <div class="radio-wrapper">
     <input type="radio" :name="name" :checked="checked" />
-    <span class="checkmark" @click="toggle()"></span>
+    <span class="checkmark"></span>
   </div>
 </template>
 
@@ -10,9 +10,7 @@ export default {
   name: "RadioButton",
   props: {
     name: String,
-    value: Boolean,
-    selected: Boolean,
-    onSelect: Function
+    selected: Boolean
   },
   data() {
     return {
@@ -22,14 +20,6 @@ export default {
   watch: {
     selected() {
       this.checked = this.selected;
-    }
-  },
-  methods: {
-    toggle() {
-      if (!this.checked) {
-        this.checked = true;
-        this.onSelect(this.value);
-      }
     }
   }
 };

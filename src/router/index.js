@@ -19,6 +19,11 @@ export default new Router({
           component: () => import('@/pages/Home')
         }
       ]
+    },
+    {
+      path: '/redirect',
+      name: 'redirect',
+      component: () => import('@/pages/Redirect')
     }
   ]
 });

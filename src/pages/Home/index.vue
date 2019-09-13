@@ -1,6 +1,6 @@
 <template>
   <div class="home-wrapper">
-    <section class="reservation">
+    <section id="reservation">
       <div class="details">
         <h1 class="title">Same room for less</h1>
         <div class="description">
@@ -14,22 +14,12 @@
           <h2>Let's start</h2>
         </div>
         <div class="reserv-header">
-          <div class="do-not-have">
-            <RadioButton
-              name="reserved"
-              :value="false"
-              :selected="!hasReservation"
-              :onSelect="handleReservationSelected"
-            />
+          <div class="do-not-have" @click="onReservationChange(false)">
+            <RadioButton name="reserved" :selected="!hasReservation" />
             <span>I don't have a reservation</span>
           </div>
-          <div class="have-already">
-            <RadioButton
-              name="reserved"
-              :value="true"
-              :selected="hasReservation"
-              :onSelect="handleReservationSelected"
-            />
+          <div class="have-already" @click="onReservationChange(true)">
+            <RadioButton name="reserved" :selected="hasReservation" />
             <span>I have a reservation</span>
           </div>
         </div>
@@ -51,7 +41,7 @@
                 <span>Choose booking service</span>
                 <div class="services">
                   <div
-                    v-for="id in bookingServices"
+                    v-for="({id}) in bookingServices"
                     :key="id"
                     :class="classes.service(id)"
                     @click="onServiceSelect(id)"
@@ -69,7 +59,7 @@
       </div>
     </section>
 
-    <section :class="classes.howitworksWrapper()">
+    <section id="how-it-works" :class="classes.howitworksWrapper()">
       <h2>How it works</h2>
 
       <div v-if="hasReservation" class="have-already">
@@ -216,21 +206,14 @@
       </div>
     </section>
 
-    <section class="testimonials">
+    <section id="testimonials">
       <label>Testimonials</label>
       <h2>We already helped people save money</h2>
-      <p>
-        Rated&nbsp;
-        <strong>8</strong>&nbsp;out of 10 based on&nbsp;
-        <u>6 564 reviews</u>&nbsp;on&nbsp;
-        <img src="@/assets/images/ic_star.png" alt="star" />&nbsp;
-        <strong>Trustpilot</strong>
-      </p>
 
-      <Carousel :testimonials="testimonialItems" />
+      <Carousel :testimonials="testimonialItems" :onWriteUs="handleWriteUs" />
     </section>
 
-    <section class="can-not-book">
+    <section id="can-not-book">
       <label>Newsletter</label>
       <h2>Can't book right now?</h2>
       <p>
@@ -247,14 +230,14 @@
       </div>
     </section>
 
-    <section class="faq">
+    <section id="faq">
       <label>F&Q</label>
       <h2>Frequently asked questions</h2>
 
       <Accordion :content="faqItems" :multiple="true" />
     </section>
 
-    <section class="contact">
+    <section id="contact">
       <h2>Contact</h2>
       <p>Fancy getting in touch with us? Leave us a message</p>
 
@@ -269,7 +252,8 @@ import Subscribe from "@/components/Subscribe";
 import Carousel from "./Carousel";
 import Accordion from "./Accordion";
 import Contact from "./Contact";
-import { code2sign } from "@/helpers/String";
+import { code2sign, scrollToY } from "@/helpers";
+
 import services from "@/services";
 
 export default {
@@ -286,7 +270,20 @@ export default {
       services,
       reservationEmail: "",
       hasReservation: false,
-      bookingServices: ["booking", "agoda", "hotels"],
+      bookingServices: [
+        {
+          id: "booking",
+          forwardUrl: "https://www.booking.com/index.html?aid=1317579"
+        },
+        {
+          id: "agoda",
+          forwardUrl: "https://www.agoda.com"
+        },
+        {
+          id: "hotels",
+          forwardUrl: "https://www.hotels.com"
+        }
+      ],
       selectedService: "booking",
       testimonialItems: [
         {
@@ -380,7 +377,7 @@ export default {
       ],
       classes: {
         service: id => ["service", { active: id === this.selectedService }],
-        howitworksWrapper: () => ["how-it-works", { low: this.hasReservation }]
+        howitworksWrapper: () => [{ low: this.hasReservation }]
       },
       images: {
         service: id => require(`@/assets/images/${id}.png`)
@@ -409,12 +406,24 @@ export default {
           text: "Faild, try again!"
         });
       }
+
+      const { href } = this.$router.resolve({ name: "redirect" });
+      const { forwardUrl } = this.bookingServices.find(
+        service => service.id === this.selectedService
+      );
+
+      localStorage.forwardUrl = forwardUrl;
+      window.open(href, "_blank");
     },
     onServiceSelect(id) {
       this.selectedService = id;
     },
-    handleReservationSelected(value) {
+    onReservationChange(value) {
       this.hasReservation = value;
+    },
+    handleWriteUs() {
+      const contactFormElement = document.getElementById("contact");
+      scrollToY(contactFormElement.offsetTop, 1000);
     }
   },
   created() {
@@ -431,7 +440,7 @@ export default {
 @import "@/constants/constants.scss";
 
 .home-wrapper {
-  .reservation {
+  #reservation {
     height: 544px;
     background-image: url("~@/assets/images/header_bg.png");
     background-size: cover;
@@ -583,19 +592,21 @@ export default {
         background-color: #f7f7f7;
         display: flex;
         align-items: center;
-        padding: 20px 0 20px 30px;
+        padding-left: 30px;
 
         @include screen-md {
           height: 60px;
         }
         @include screen-xs {
-          padding: 14px 0px 15px 10px;
+          padding-left: 10px;
           height: 38px;
         }
 
         > div {
           display: flex;
           align-items: center;
+          height: 100px;
+          cursor: pointer;
 
           &:nth-child(2) {
             margin-left: 54px;
@@ -832,15 +843,10 @@ export default {
                 height: 50px;
                 box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
                 border-radius: 4px;
-                background-color: #09d4a1;
               }
 
               &:hover {
                 background-color: #e02900;
-
-                @include screen-sm {
-                  background-color: #05ad83;
-                }
               }
             }
           }
@@ -849,7 +855,7 @@ export default {
     }
   }
 
-  .how-it-works {
+  #how-it-works {
     padding-top: 218px;
     height: 579px;
     background-color: #ffffff;
@@ -1260,7 +1266,7 @@ export default {
     }
   }
 
-  .testimonials {
+  #testimonials {
     height: 880px;
     background-color: #fafafa;
     text-align: center;
@@ -1304,44 +1310,19 @@ export default {
       font-size: 48px;
       font-weight: 600;
       margin: 0;
+      padding-bottom: 30px;
 
       @include screen-md {
         font-size: 38px;
+        padding-bottom: 20px;
       }
       @include screen-sm {
         display: none;
-      }
-    }
-    p {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #7d7d7d;
-      font-family: Rubik;
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 30px;
-
-      @include screen-md {
-        font-size: 15px;
-      }
-      @include screen-sm {
-        display: none;
-      }
-
-      strong {
-        color: #091613;
-        font-weight: 500;
-      }
-      img {
-        width: 25px;
-        height: 24px;
-        object-fit: contain;
       }
     }
   }
 
-  .can-not-book {
+  #can-not-book {
     height: 557px;
     background-color: #25302d;
     text-align: center;
@@ -1446,7 +1427,7 @@ export default {
     }
   }
 
-  .faq {
+  #faq {
     background-color: #fafafa;
     text-align: center;
     padding: 100px 0 100px;
@@ -1494,7 +1475,7 @@ export default {
     }
   }
 
-  .contact {
+  #contact {
     text-align: center;
     padding: 100px 0 100px;
     height: 816px;

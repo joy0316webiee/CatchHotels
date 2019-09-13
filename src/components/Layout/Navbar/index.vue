@@ -5,11 +5,13 @@
     </div>
     <ul class="menu" :class="classes.menu()">
       <li
-        v-for="({id, label}) in menuItems"
+        v-for="({id, label, href}) in menuItems"
         :key="id"
         :class="activeClass(id)"
-        @click="onSelectMenuItem(id)"
-      >{{label}}</li>
+        @click="onSelectMenuItem(id, href)"
+      >
+        <a :href="href">{{label}}</a>
+      </li>
       <li class="lang">
         <LanguageSelector />
       </li>
@@ -27,6 +29,7 @@
 
 <script>
 import LanguageSelector from "./LanguageSelector";
+import { scrollToY } from "@/helpers";
 
 export default {
   name: "Navbar",
@@ -37,31 +40,32 @@ export default {
     return {
       menuItems: [
         {
-          id: 0,
-          label: "Reserv hotel"
-        },
-        {
           id: 1,
-          label: "How it works"
+          label: "How it works",
+          href: "#how-it-works"
         },
         {
           id: 2,
-          label: "Testimonials"
+          label: "Testimonials",
+          href: "#testimonials"
         },
         {
           id: 3,
-          label: "Can't book right now"
+          label: "Can't book right now",
+          href: "#can-not-book"
         },
         {
           id: 4,
-          label: "F&Q"
+          label: "F&Q",
+          href: "#faq"
         },
         {
           id: 5,
-          label: "Contact"
+          label: "Contact",
+          href: "#contact"
         }
       ],
-      selectedMenuItem: 0,
+      selectedMenuItem: 1,
       openedHamburgerMenu: false,
       classes: {
         menu: () => [{ "hamhurger-opened": this.openedHamburgerMenu }]
@@ -78,9 +82,15 @@ export default {
     closeHamburgerMenu() {
       this.openedHamburgerMenu = false;
     },
-    onSelectMenuItem(id) {
+    onSelectMenuItem(id, target) {
       this.selectedMenuItem = id;
       this.closeHamburgerMenu();
+
+      // scrolling
+      const targetElement = document.getElementById(
+        target.substr(1, target.length)
+      );
+      scrollToY(targetElement.offsetTop, 1000);
     }
   }
 };
@@ -133,7 +143,7 @@ export default {
     }
   }
   ul {
-    width: 888px;
+    width: 800px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -142,7 +152,7 @@ export default {
     justify-content: space-between;
 
     @include screen-md {
-      width: 700px;
+      width: 620px;
     }
     @include screen-sm {
       position: fixed;
@@ -174,7 +184,6 @@ export default {
     }
 
     li {
-      color: #091613;
       font-family: Rubik;
       font-size: 18px;
       font-weight: 400;
@@ -189,12 +198,10 @@ export default {
       @include screen-sm {
         position: relative;
         font-size: 16px;
-        color: #ffffff;
         margin-bottom: 25px;
       }
 
       &.active {
-        color: #09d4a1;
         position: relative;
 
         &::after {
@@ -214,6 +221,10 @@ export default {
             display: none;
           }
         }
+
+        a {
+          color: #09d4a1;
+        }
       }
       &.lang {
         @include screen-sm {
@@ -228,6 +239,15 @@ export default {
 
         @include screen-sm {
           display: inline-block;
+        }
+      }
+
+      a {
+        color: #091613;
+        text-decoration: none;
+
+        @include screen-sm {
+          color: #ffffff;
         }
       }
     }

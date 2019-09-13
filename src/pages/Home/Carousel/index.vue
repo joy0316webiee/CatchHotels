@@ -40,7 +40,7 @@
         <div slot="slideContent">
           <h3>Did we help you?</h3>
           <p>Share it with others.</p>
-          <button>write a review</button>
+          <button @click="onWriteUs">write a review</button>
         </div>
       </vueper-slide>
     </vueper-slides>
@@ -58,7 +58,8 @@ export default {
     VueperSlide
   },
   props: {
-    testimonials: Array
+    testimonials: Array,
+    onWriteUs: Function
   },
   data() {
     return {

@@ -9,20 +9,12 @@
 @import "@/constants/constants.scss";
 
 // fonts
-@font-face {
-  font-family: "Rubik";
-  src: url("~@/assets/fonts/Rubik-Regular.ttf");
-}
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600|Rubik:400,500|Source+Sans+Pro:400,700&display=swap");
 
 @font-face {
   font-family: "Sign Painter House Script";
   src: url("~@/assets/fonts/SignPainter HouseScript Regular.ttf");
 }
-
-/* @font-face {
-  font-family: "Poppins";
-  src: url("~@/assets/fonts/Poppins-Regular.ttf");
-} */
 
 // basic styling
 * {
@@ -84,8 +76,4 @@ body {
     }
   }
 }
-
-/* div {
-  border: 1px solid #ddd;
-} */
 </style>

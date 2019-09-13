@@ -22,29 +22,13 @@ const listAllTestimonials = () => {
 };
 
 // Write testimonials
-const writeTestimonials = (
-  id,
-  name,
-  surname,
-  mail,
-  review,
-  oldPrice,
-  newPrice,
-  currencyCode
-) => {
+// prettier-ignore
+const writeTestimonials = ( id, name, surname, mail, review, oldPrice, newPrice, currencyCode) => {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      id,
-      name,
-      surname,
-      mail,
-      review,
-      oldPrice,
-      newPrice,
-      currencyCode
-    })
+    // prettier-ignore
+    body: JSON.stringify({ id, name, surname, mail, review, oldPrice, newPrice, currencyCode })
   };
 
   return fetch(`${apiUrl}/testimonials`, requestOptions).then(handleResponse);
