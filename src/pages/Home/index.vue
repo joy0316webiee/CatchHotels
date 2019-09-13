@@ -2,10 +2,10 @@
   <div class="home-wrapper">
     <section id="reservation">
       <div class="details">
-        <h1 class="title">Same room for less</h1>
+        <h1 class="title">{{ $t('reservTitle') }}</h1>
         <div class="description">
-          <p>Over 40 % hotel rooms either free up or get discounted.</p>
-          <p>We will keep an eye on the hotel deals and send you a notification once its price drops</p>
+          <p>{{ $t('reservDesc1') }}</p>
+          <p>{{ $t('reservDesc2') }}</p>
         </div>
       </div>
 

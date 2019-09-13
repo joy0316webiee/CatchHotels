@@ -4,9 +4,9 @@
       <img :src="getLanguageImage(selectedLanguage)" alt="lang" />
     </div>
     <ul class="dropdown-menu" v-show="opened">
-      <li v-for="({id, name}) in languages" :key="id" @click="onLanguageSelect(id)">
+      <li v-for="({id, title}) in languages" :key="id" @click="onLanguageSelect(id)">
         <img :src="getLanguageImage(id)" alt="eng" />
-        <span>{{name}}</span>
+        <span>{{title}}</span>
       </li>
     </ul>
   </div>
@@ -14,6 +14,7 @@
 
 <script>
 import ClickOutside from "vue-click-outside";
+import { i18n } from "@/plugins/i18n";
 
 export default {
   name: "LanguageSelector",
@@ -22,15 +23,15 @@ export default {
       opened: false,
       languages: [
         {
-          id: "eng",
-          name: "English"
+          id: "en",
+          title: "English"
         },
         {
-          id: "cze",
-          name: "Czech"
+          id: "cz",
+          title: "Czech"
         }
       ],
-      selectedLanguage: "eng"
+      selectedLanguage: "en"
     };
   },
   methods: {
@@ -45,6 +46,7 @@ export default {
     },
     onLanguageSelect(lang) {
       this.selectedLanguage = lang;
+      i18n.locale = lang;
       this.hide();
     }
   },
