@@ -14,7 +14,7 @@
         <div slot="slideContent">
           <div class="card-header">
             <div class="avatar">
-              <img :src="require(`@/assets/images/${testimonial.avatar}.png`)" alt="avatar" />
+              <img :src="testimonial.avatar" alt="avatar" />
             </div>
             <div class="details">
               <span class="name">{{`${testimonial.name} ${testimonial.surname}`}}</span>
@@ -58,11 +58,12 @@ export default {
     VueperSlide
   },
   props: {
-    testimonials: Array,
+    data: Array,
     onWriteUs: Function
   },
   data() {
     return {
+      testimonials: this.data,
       breakpoints: {
         1340: {
           visibleSlides: 2,
@@ -75,6 +76,11 @@ export default {
         }
       }
     };
+  },
+  watch: {
+    data() {
+      this.testimonials = this.data;
+    }
   }
 };
 </script>

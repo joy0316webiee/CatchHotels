@@ -1,6 +1,6 @@
 <template>
   <dl class="accordion box" role="presentation">
-    <AccordionItem v-for="item in content" :item="item" :groupId="groupId" :key="item.id" />
+    <AccordionItem v-for="item in faqItems" :item="item" :groupId="groupId" :key="item.id" />
   </dl>
 </template>
 
@@ -24,8 +24,14 @@ export default {
   },
   data() {
     return {
+      faqItems: this.content,
       groupId: null
     };
+  },
+  watch: {
+    content() {
+      this.faqItems = this.content;
+    }
   },
   mounted() {
     this.groupId = this.$el.id;

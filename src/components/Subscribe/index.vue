@@ -6,11 +6,10 @@
 </template>
 
 <script>
+import services from "@/services";
+
 export default {
   name: "Subscribe",
-  props: {
-    onSubcribe: Function
-  },
   data() {
     return {
       subscribeEmail: ""
@@ -18,23 +17,25 @@ export default {
   },
   methods: {
     onSubmit() {
-      const { success, message } = this.onSubcribe(this.subscribeEmail);
-
-      if (success) {
-        this.$notify({
-          group: "notify",
-          type: "success",
-          title: "Subscribe Newsletter",
-          text: message
+      services
+        .subscribeNewsletter(this.subscribeEmail)
+        .then(({ success, message }) => {
+          if (success) {
+            this.$notify({
+              group: "notify",
+              type: "success",
+              title: "Subscribe Newsletter",
+              text: message
+            });
+          } else {
+            this.$notify({
+              group: "notify",
+              type: "error",
+              title: "Subscribe Newsletter",
+              text: message
+            });
+          }
         });
-      } else {
-        this.$notify({
-          group: "notify",
-          type: "error",
-          title: "Subscribe Newsletter",
-          text: "Faild, try again!"
-        });
-      }
     }
   }
 };

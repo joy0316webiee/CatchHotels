@@ -210,7 +210,7 @@
       <label>Testimonials</label>
       <h2>We already helped people save money</h2>
 
-      <Carousel :testimonials="testimonialItems" :onWriteUs="handleWriteUs" />
+      <Carousel :data="testimonialItems" :onWriteUs="handleWriteUs" />
     </section>
 
     <section id="can-not-book">
@@ -222,7 +222,7 @@
       </p>
 
       <div class="subscribe">
-        <Subscribe :onSubcribe="services.subscribeNewsletter" />
+        <Subscribe />
         <p>
           By clicking the subscribe button you agree to our
           <u>T&C</u>
@@ -241,7 +241,7 @@
       <h2>Contact</h2>
       <p>Fancy getting in touch with us? Leave us a message</p>
 
-      <Contact :onSend="services.writeUs" />
+      <Contact />
     </section>
   </div>
 </template>
@@ -427,11 +427,12 @@ export default {
     }
   },
   created() {
-    const { data: testimonials } = services.listAllTestimonials();
-    const { data: faq } = services.listAllFAQ();
-
-    if (testimonials) this.testimonialItems = testimonials;
-    if (faq) this.faqItems = faq;
+    services.listAllTestimonials().then(({ data }) => {
+      this.testimonialItems = data;
+    });
+    services.listAllFAQ().then(({ data }) => {
+      this.faqItems = data;
+    });
   }
 };
 </script>

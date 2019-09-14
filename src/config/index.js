@@ -1,1 +1,1 @@
-export const apiUrl = 'http://polls.apiblueprint.org/api';
+export const apiUrl = 'https://catchhotelsapi.azurewebsites.net/api';

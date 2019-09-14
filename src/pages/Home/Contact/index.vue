@@ -9,14 +9,12 @@
 
 <script>
 import PhoneInput from "../PhoneInput";
+import services from "@/services";
 
 export default {
   name: "Contact",
   components: {
     PhoneInput
-  },
-  props: {
-    onSend: Function
   },
   data() {
     return {
@@ -27,33 +25,25 @@ export default {
   },
   methods: {
     onSubmit() {
-      const { success, message } = this.onSend(
-        this.contactEmail,
-        this.phoneNumber,
-        this.message
-      );
-
-      const text = message.reduce((acc, message) => {
-        if (acc !== "") acc += "<br>";
-        acc += message;
-        return acc;
-      }, "");
-
-      if (success) {
-        this.$notify({
-          group: "notify",
-          type: "success",
-          title: "Write Message",
-          text
+      services
+        .writeUs(this.contactEmail, this.phoneNumber, this.message)
+        .then(({ success, message }) => {
+          if (success) {
+            this.$notify({
+              group: "notify",
+              type: "success",
+              title: "Write Message",
+              text: message
+            });
+          } else {
+            this.$notify({
+              group: "notify",
+              type: "error",
+              title: "Write Message",
+              text: "Faild, try again!"
+            });
+          }
         });
-      } else {
-        this.$notify({
-          group: "notify",
-          type: "error",
-          title: "Write Message",
-          text: "Faild, try again!"
-        });
-      }
     },
     handlePhoneChange(phoneNumber) {
       this.phoneNumber = phoneNumber;
